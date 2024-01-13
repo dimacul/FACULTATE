@@ -1,0 +1,164 @@
+Metoda PD - consta in det de subpb utile(nu neaparat de acelasi tip cu pb initiala)
+            care se suprapun + det de relatii de recurenta pt rezolvarea lor
+
+            Pt a nu rezolva o subpb de mai multe ori, se memoreaza rezultatele subpb deja rezolvate (memorizare)
+
+PD -> al n-lea termen Fibonacci
+
+def fibo(n):
+    if n<=1:
+        return 1
+    return fibo(n-1) + fibo(n-2)
+
+    NU ASA, pt ca devine exponential
+    Am rezultate partiale, pe care nu le folosesc niciunde
+    Rezolv o pb de mai multe ori
+
+    fibo7
+    fibo6           + fibo5
+    fibo5+fibo4
+
+    Ar trebui memorate rezultatele subproblemelor.
+
+def fibo(n)
+    if n<=1: return 1
+    if F[n]!=None
+        return F[n]
+    F[n]=fibo(n-1)+fibo(n-2)
+    return F[n]
+
+    F- vectorul in care memorez rezultatele
+
+Alta varianta -> rezolv nerecursiv recurenta
+
+Ex:
+    Pb optim   rel de recurenta se det dintr-un principiu de optimalitate
+
+    d1 d2       dk - sol optima
+    =>d1 d2    dk sol optima pt o subpb
+
+    (d1     dk-1 sol optima)
+
+
+Traseu de suma maxima:
+    Se da o matrice triunghiulara de nr naturale.
+
+    2
+    1  4
+    10 2  5
+    1  7  3  6
+
+    Sa se det un traseu de suma maxima cu regulile de deplasare:
+        - pornim de pe prima linie
+        - din celula i,j ma pot deplasa doar pe linia urm -> i=1,j  sau i+1, j+1
+        - termin pe ultima linie
+
+Greedy - ne deplasam mereu in celula cu valoare maxima
+2-4-5-6=> 17 (nu e optim)
+
+Optim: 2-1-10-7=> 20
+
+0.0
+|   \       -> trebuie sa aleg
+1.0 1.1
+
+Daca as sti care este suma maxima pe care o putem obtine pornind din 1.0 si din 1.1, am sti unde sa facem primul pas
+
+Solutia: calculez care este suma maxima pe care o putem obtine pornind din celul i,j in jos
+Memorez intr-o matrice
+
+Solutia: s[0][0]
+Rel de recurenta: s[i][j]=a[i][j]+max( s[i+1][j], s[i+1][j+1] )
+Direct - stiu sa calculez ultima linie
+    s[n-1][j]=a[n-1][j]
+
+
+    a=matricea intiala,   s= matricea in care calculez suma maxima a traseului maxim pana la s[i][j]
+
+
+a:                      s:
+2                          20
+1   4                      18  15
+10  2   5                  17  9   11
+1   7   3   6              1   7   3   6
+
+Ordinea de calcul pt s -> de la ultima linie spre prima.
+
+
+
+Putem reconstitui un traseu invers fata de ordinea de calcul, pornind din 0.0 -> merg in vecinul cu s cel mai mare
+
+
+
+
+Varianta a 2-a - se leaga de care este ultimul pas
+
+subpb - care este suma maxima pornind din 0.0 si ajungand in i.j
+
+
+
+
+
+Solutia pb:
+            max(s[n-1][i], i=0, n-1
+            maximul de pe ultima linie
+            Recurenta:
+                s[i][j]=a[i][j]+max( s[i-1][j], s[i-1][j-1] )
+                                    daca exista
+
+a:                      s:
+2                          2
+1   4                      3   6
+10  2   5                  13  8   11
+1   7   3   6              14  20  14  17
+
+
+
+2)
+    Sa se de termine lungimea maxima a unui subsir crescator dintr-un vector
+
+    v= 10   4   1   8    6  5  7    9   2
+
+    sol 1 6 7 9
+    alta sol   1 5 7 9
+
+    -Sa se det un subsir crescator de lungime maxima
+    -Sa se det numarul de subsiruri crescatoare de lungime maxima
+
+
+    x=5=v[5]
+    primul elem
+
+    Pt a sti care element tb adaugat dupa x=1, ar trebui sa stiu care este cel mai lung subsir care incepe cu v[6] sau v[7]
+                                                                                    (cu elemente mai mari sau egale cu x de la dreapta lui)
+
+    Subpb - lungimea maxima a unui subsir crescator, care incepe pe pozitia i
+
+
+
+    i   ...    ...     ...    ...
+    lung[i]=i+max{lung[j] | j>i, v[j]>v[i]}
+
+    Solutia pb = max(lung)
+         0      1   2   3   4   5   6   7   8
+         10     4   1   8   6   5   7   9   2
+lung:                           3   2   1   1
+succ:                             din 9 -1  -1
+
+Stim lung[n-1]=1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
